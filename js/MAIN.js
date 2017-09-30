@@ -36,6 +36,10 @@ function init() {
 
     // GENERATE ORGANISMS //
 
+    generateSpores(60, 0, 0, width, height);
+
+    generateOrganism1(8, 0, 0, width, height);
+
 
     // BEGIN //
     loop();
@@ -46,16 +50,24 @@ function init() {
 //  GENERATE
 //-------------------------------------------------------------------------------------------
 
-function generateSpores() {
+function generateSpores(n, x1, y1, x2, y2) {
+
+    for (var i=0; i<n; i++) {
+        spores.push( new Spore(x1, y1, x2, y2) );
+    }
 }
 
-function generateOrganism1() {
+function generateOrganism1(n, x1, y1, x2, y2) {
+    for (var i=0; i<n; i++) {
+        org1.push( new Organism1(x1, y1, x2, y2) );
+    }
 }
 
 function generateOrganism2() {
 }
 
-function generateVisual() {
+function generateVisual(position, size) {
+    visuals.push( new Visual(position.x, position.y, size * 2) );
 }
 
 
@@ -78,14 +90,25 @@ function update() {
 
     // LOOP THROUGH ALL SPORES AND UPDATE THEIR POSITIONS //
 
+    for (var i=0; i<spores.length; i++) {
+        spores[i].update();
+    }
 
     // LOOP THROUGH ALL ORGANISM1 AND UPDATE THEIR POSITIONS //
+
+    for (var i=0; i<org1.length; i++) {
+        org1[i].update();
+    }
 
 
     // LOOP THROUGH ALL ORGANISM2 AND UPDATE THEIR POSITIONS //
 
 
     // LOOP THROUGH ALL VISUALS AND ANIMATE THEM //
+
+    for (var i=0; i<visuals.length; i++) {
+        visuals[i].update();
+    }
 
 
 }
@@ -103,14 +126,26 @@ function draw() {
 
     // LOOP THROUGH ALL SPORES AND DRAW THEM //
 
+    for (var i=0; i<spores.length; i++) {
+        spores[i].draw();
+    }
+
 
     // LOOP THROUGH ALL ORGANISM1 AND DRAW THEM //
+
+    for (var i=0; i<org1.length; i++) {
+        org1[i].draw();
+    }
 
 
     // LOOP THROUGH ALL ORGANISM2 AND DRAW THEM //
 
 
     // LOOP THROUGH ALL VISUALS AND DRAW THEM //
+
+    for (var i=0; i<visuals.length; i++) {
+        visuals[i].draw();
+    }
 
 
     // DRAW TITLE //
