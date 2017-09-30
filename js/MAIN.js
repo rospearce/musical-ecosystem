@@ -22,6 +22,8 @@ var org2 = [];
 //  INITIALISE
 //-------------------------------------------------------------------------------------------
 
+// this function is called when the page loads
+
 function init() {
 
     // SETUP CANVAS //
@@ -36,9 +38,11 @@ function init() {
 
     // GENERATE ORGANISMS //
 
+    // so that generate functions are called when the page loads and organisms and spores are created //
+
     generateSpores(60, 0, 0, width, height);
 
-    generateOrganism1(8, 0, 0, width, height);
+    generateOrganism1(6, 0, 0, width, height);
 
 
     // BEGIN //
@@ -49,6 +53,8 @@ function init() {
 //-------------------------------------------------------------------------------------------
 //  GENERATE
 //-------------------------------------------------------------------------------------------
+
+// for loops generate bunch of instances of spores/organisms within the given coordinates, saving them to an array //
 
 function generateSpores(n, x1, y1, x2, y2) {
 
@@ -65,6 +71,8 @@ function generateOrganism1(n, x1, y1, x2, y2) {
 
 function generateOrganism2() {
 }
+
+// create an instance generate function for visual, (update and draw on its instances called below)
 
 function generateVisual(position, size) {
     visuals.push( new Visual(position.x, position.y, size * 2) );
@@ -89,6 +97,7 @@ function loop() {
 function update() {
 
     // LOOP THROUGH ALL SPORES AND UPDATE THEIR POSITIONS //
+    // updates the position of every instance of spore before they are drawn
 
     for (var i=0; i<spores.length; i++) {
         spores[i].update();
@@ -125,6 +134,8 @@ function draw() {
     ctx.fillRect(0, 0, width, height);
 
     // LOOP THROUGH ALL SPORES AND DRAW THEM //
+
+    // so once have created instances of spores in an array we want to draw them. draw loop gets called 60 times per second //
 
     for (var i=0; i<spores.length; i++) {
         spores[i].draw();

@@ -1,3 +1,5 @@
+// unlike a spore, and organism swims in a direction, feeds on spores to gain energy, and when it has enough energy it looks for a breeding partner. if it runs out of energy it will die, releasing spores back into the system.
+
 var org1Settings = {
     speed: 3.5,
     minSpeed: 1.8,
@@ -14,13 +16,15 @@ var org1Settings = {
     feedProximity: 16,
     color: 'coral',
     soundAttack: 0.1,
-    soundRelease: 2.5,
+    soundRelease: 3.5,
     soundVolume: 0.2
 };
 
 //-------------------------------------------------------------------------------------------
 //  INITIALISE
 //-------------------------------------------------------------------------------------------
+
+// contructor function for organism1 - similar to what we did for spore except now we're randomising a direction for our organism to head in
 
 function Organism1(x1, y1, x2, y2) {
     this.settings = org1Settings;
@@ -44,9 +48,14 @@ function Organism1(x1, y1, x2, y2) {
 //  UPDATE
 //-------------------------------------------------------------------------------------------
 
+// several types of behaviour to code
+// update method could be improved in the future by separating each behaviour like breeding and feeding into its own method
+
 Organism1.prototype.update = function() {
 
     // BREEDING //
+    // similar to the feeding code, the breeding code checks if an organism has enough energy to breed before looping through any potential partners and seeing if they're close by
+    // if so they'll head towards them and when close enough create a brand new instance of organism1
     if (this.energy > this.settings.breedEnergy) {
         var partner = null;
         var range = this.settings.breedRange;
@@ -81,6 +90,8 @@ Organism1.prototype.update = function() {
     }
 
     // FEEDING //
+    // also create a need for feeding by making the organism's energy gradually deplete over time
+    // code checks to see if the organism needs to eat, then loops through all available food to see if there is any in range, and if so adjusts its angle to point towards it
     if (!partner && this.energy < this.settings.feedCap) {
         var target = null;
         var range = this.settings.feedRange;
@@ -112,6 +123,7 @@ Organism1.prototype.update = function() {
     }
 
     // MOVEMENT //
+    // instead of adding random numbers to the x axis and the y axis movement like in a spore, here we add a random number fluctuation to our angle, creating more of a swimming motion
     // Store a memory of previous positions //
     this.lastPositions.push( this.position.clone() );
     if (this.lastPositions.length > this.settings.tail) {
@@ -148,6 +160,9 @@ Organism1.prototype.update = function() {
 //-------------------------------------------------------------------------------------------
 //  DRAW
 //-------------------------------------------------------------------------------------------
+
+// as well as some regular line drawing we have a loop where we connect a line between a stored history of previous positions, creating a trailing tail
+// we're also rotating the drawing context to match the direction the organism is headed
 
 Organism1.prototype.draw = function() {
 
@@ -194,11 +209,19 @@ Organism1.prototype.draw = function() {
 //  KILL
 //-------------------------------------------------------------------------------------------
 
+// make is so that the organism can die
+// when an organism1 dies, it gets deleted from the array of instances, and creates a cloud of spores in its places
+
 Organism1.prototype.kill = function() {
 removeFromArray(this, org1);
     var area = 30 * scale;
     generateSpores(this.size * 0.72, this.position.x - area, this.position.y - area, this.position.x + area, this.position.y + area);
+    
+    // kill method now calls the generateVisual function
     generateVisual(this.position, this.size);
+
+    // kill method now calls soundEvent function to generate audio effect
+    soundEvent(this.settings.soundVolume, this.settings.soundAttack, this.settings.soundRelease);
 };
 
 

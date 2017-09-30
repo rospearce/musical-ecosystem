@@ -1,3 +1,5 @@
+// add visual events
+
 var visualSettings = {
     color: 'lightCoral'
 }
@@ -5,6 +7,8 @@ var visualSettings = {
 //-------------------------------------------------------------------------------------------
 //  INITIALISE
 //-------------------------------------------------------------------------------------------
+
+// constructor function sets size, position and alpha transparency of visual object
 
 function Visual(x, y, size) {
     this.settings = visualSettings;
@@ -16,6 +20,8 @@ function Visual(x, y, size) {
 //-------------------------------------------------------------------------------------------
 //  UPDATE
 //-------------------------------------------------------------------------------------------
+
+// update method to grow and fade the visual every frame until it fades out entirely, at which point we remove it
 
 Visual.prototype.update = function() {
     // fade and grow //
@@ -31,6 +37,8 @@ Visual.prototype.update = function() {
 //-------------------------------------------------------------------------------------------
 //  DRAW
 //-------------------------------------------------------------------------------------------
+
+// create pair of expanding circles
 
 Visual.prototype.draw = function() {
     // drawing style //
