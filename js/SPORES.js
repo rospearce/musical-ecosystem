@@ -6,7 +6,7 @@ var sporeSettings = {
     large: 4,
     variation: 34,
     color: 'snow',
-    highlight: 'coral',
+    highlight: 'cyan',
     soundAttack: 0.02,
     soundRelease: 1.5,
     soundVolume: 0.5

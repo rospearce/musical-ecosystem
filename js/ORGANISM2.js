@@ -109,7 +109,7 @@ Organism2.prototype.update = function() {
 
     // make sure to take away less energy than orgamism1 so that fewer organisms last longer
 
-    this.energy -= 0.004;
+    this.energy -= 0.005;
     if (this.energy <= 0) {
         this.kill();
     }
