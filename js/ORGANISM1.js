@@ -17,7 +17,9 @@ var org1Settings = {
     color: 'coral',
     soundAttack: 0.1,
     soundRelease: 3.5,
-    soundVolume: 0.2
+    soundVolume: 0.2,
+    mouseRange: 500,
+    mouseProximity: 20
 };
 
 //-------------------------------------------------------------------------------------------
@@ -122,7 +124,28 @@ Organism1.prototype.update = function() {
         this.kill();
     }
 
+    // INTERACTION //
+
+    if (mouseIsDown) {
+        range = distanceBetweenPoints(this.position, organism.position);
+        if (range < this.settings.mouseRange) {
+        var mouseAngle = angleBetweenPoints(this.position, mousePosition);
+        this.angleDest = mouseAngle;
+        }
+    
+        if (range < this.settings.mouseProximity){
+            this.size += 0.1;
+        }
+    }
+
+    // size cap
+
+    if (this.size > 50) {
+        this.kill
+    }
+
     // MOVEMENT //
+    
     // instead of adding random numbers to the x axis and the y axis movement like in a spore, here we add a random number fluctuation to our angle, creating more of a swimming motion
     // Store a memory of previous positions //
     this.lastPositions.push( this.position.clone() );

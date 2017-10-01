@@ -3,6 +3,10 @@
 var canvas;
 var ctx;
 
+// // MOUSE EVENTS //
+
+// var mousePosition = new Point (0,0);
+
 
 // METRICS //
 var width = 0;
@@ -10,6 +14,13 @@ var height = 0;
 var ratio = 1;
 var scale = 1;
 var TAU = 2 * Math.PI;
+
+//INTERACTION
+var mouseX = 0;
+var mouseY = 0;
+var mousePosition;
+var mouseIsDown = false;
+
 
 
 // ECO SYSTEM //
@@ -33,6 +44,16 @@ function init() {
     // SET CANVAS & DRAWING POSITIONS //
     metrics();
 
+    // add canvas event listener
+
+    // canvas.addEventListener("mousemove", function(event) {
+    //     mousePosition.x = event.clientX;
+    //     mousePosition.y = event.clientY;
+    // });
+
+    
+    setupInteraction();
+
     // INITIALISE AUDIO //
     setupAudio();
 
@@ -42,7 +63,7 @@ function init() {
 
     generateSpores(60, 0, 0, width, height);
 
-    generateOrganism1(6, 0, 0, width, height);
+    generateOrganism1(8, 0, 0, width, height);
 
 
     // BEGIN //

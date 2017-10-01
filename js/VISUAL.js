@@ -47,7 +47,9 @@ Visual.prototype.draw = function() {
     ctx.lineWidth = 4 * scale;
 
     // draw circles //
+    // ctx is the thing that we're drawing to which has lots of drawing methods
     ctx.beginPath();
+    // arc draws a curve, using 0 as start angle and TAU as finishing creates a circle, TAU definined elsewhere in JS as 2*Math.PI
     ctx.arc(this.position.x, this.position.y, this.size, 0, TAU);
     ctx.moveTo(this.position.x + this.size + 10, this.position.y);
     ctx.arc(this.position.x, this.position.y, this.size + 10, 0, TAU);
