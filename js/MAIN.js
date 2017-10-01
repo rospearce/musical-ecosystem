@@ -65,7 +65,7 @@ function init() {
 
     generateOrganism1(8, 0, 0, width, height);
 
-    generateOrganism2(4, 0, 0, width, height);
+    generateOrganism2(3, 0, 0, width, height);
 
 
     // BEGIN //

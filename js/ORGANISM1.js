@@ -6,7 +6,7 @@ var org1Settings = {
     fluctuation: (TAU/360) * 12,
     rotationSpeed: 12,
     small: 16,
-    large: 22,
+    large: 21,
     tail: 17,
     breedRange: 420,
     breedEnergy: 8,

@@ -1,10 +1,10 @@
 var org2Settings = {
-    speed: 2.5,
+    speed: 2.0,
     minSpeed: 1.2,
     fluctuation: (TAU/360) * 12,
     rotationSpeed: 12,
-    small: 32,
-    large: 38,
+    small: 35,
+    large: 41,
     tail: 22,
     breedRange: 400,
     breedEnergy: 7,
@@ -109,7 +109,7 @@ Organism2.prototype.update = function() {
 
     // make sure to take away less energy than orgamism1 so that fewer organisms last longer
 
-    this.energy -= 0.005;
+    this.energy -= 0.004;
     if (this.energy <= 0) {
         this.kill();
     }
