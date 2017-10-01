@@ -1,7 +1,7 @@
 // unlike a spore, and organism swims in a direction, feeds on spores to gain energy, and when it has enough energy it looks for a breeding partner. if it runs out of energy it will die, releasing spores back into the system.
 
 var org1Settings = {
-    speed: 3.5,
+    speed: 2.5,
     minSpeed: 1.8,
     fluctuation: (TAU/360) * 12,
     rotationSpeed: 12,

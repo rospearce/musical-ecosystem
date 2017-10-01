@@ -1,17 +1,17 @@
 var org2Settings = {
-    speed: 2.8,
-    minSpeed: 1.1,
-    fluctuation: (TAU/360) * 8,
-    rotationSpeed: 8,
+    speed: 2.5,
+    minSpeed: 1.2,
+    fluctuation: (TAU/360) * 12,
+    rotationSpeed: 12,
     small: 32,
     large: 38,
     tail: 22,
-    breedRange: 700,
+    breedRange: 400,
     breedEnergy: 7,
     breedProximity: 30,
-    feedRange: 150,
-    feedCap: 50,
-    feedProximity: 25,
+    feedRange: 260,
+    feedCap: 20,
+    feedProximity: 26,
     color: 'orchid',
     soundAttack: 0.1,
     soundRelease: 3,
@@ -178,10 +178,14 @@ Organism2.prototype.draw = function() {
     ctx.rotate(this.angle);
 
     ctx.beginPath();
-    ctx.moveTo(s * 0.75, s/2);
-    ctx.lineTo(0, s * 1.25);
-    ctx.moveTo(s * 0.75, -s/2);
-    ctx.lineTo(0, -s * 1.25);
+
+    ctx.moveTo(s, 0);
+    ctx.lineTo(s/2, s/2);
+    ctx.lineTo(-s/2, s/2);
+
+    ctx.moveTo(s, 0);
+    ctx.lineTo(s/2, -s/2);
+    ctx.lineTo(-s/2, -s/2);
 
     ctx.moveTo(0, s/2);
     ctx.lineTo(s/2, 0);
