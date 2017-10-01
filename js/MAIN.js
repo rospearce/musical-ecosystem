@@ -65,6 +65,8 @@ function init() {
 
     generateOrganism1(8, 0, 0, width, height);
 
+    generateOrganism2(3, 0, 0, width, height);
+
 
     // BEGIN //
     loop();
@@ -90,7 +92,10 @@ function generateOrganism1(n, x1, y1, x2, y2) {
     }
 }
 
-function generateOrganism2() {
+function generateOrganism2(n, x1, y1, x2, y2) {
+    for (var i=0; i<n; i++) {
+        org2.push( new Organism2(x1, y1, x2, y2) );
+    }
 }
 
 // create an instance generate function for visual, (update and draw on its instances called below)
@@ -133,6 +138,10 @@ function update() {
 
     // LOOP THROUGH ALL ORGANISM2 AND UPDATE THEIR POSITIONS //
 
+    for (var i=0; i<org2.length; i++) {
+        org2[i].update();
+    }
+
 
     // LOOP THROUGH ALL VISUALS AND ANIMATE THEM //
 
@@ -171,6 +180,10 @@ function draw() {
 
 
     // LOOP THROUGH ALL ORGANISM2 AND DRAW THEM //
+
+    for (var i=0; i<org2.length; i++) {
+        org2[i].draw();
+    }
 
 
     // LOOP THROUGH ALL VISUALS AND DRAW THEM //

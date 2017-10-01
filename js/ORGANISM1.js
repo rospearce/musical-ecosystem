@@ -18,7 +18,7 @@ var org1Settings = {
     soundAttack: 0.1,
     soundRelease: 3.5,
     soundVolume: 0.2,
-    mouseRange: 500,
+    mouseRange: 600,
     mouseProximity: 20
 };
 
@@ -133,6 +133,8 @@ Organism1.prototype.update = function() {
         this.angleDest = mouseAngle;
         }
     
+    // mouseProximity used for grow function, mouseRange for range to call the organisms towards the mouse
+
         if (range < this.settings.mouseProximity){
             this.size += 0.1;
         }
