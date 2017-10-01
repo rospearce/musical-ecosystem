@@ -1,16 +1,16 @@
 var org2Settings = {
-    speed: 2.6,
+    speed: 2.8,
     minSpeed: 1.1,
     fluctuation: (TAU/360) * 8,
-    rotationSpeed: 6,
+    rotationSpeed: 8,
     small: 32,
     large: 38,
     tail: 22,
-    breedRange: 600,
-    breedEnergy: 35,
-    breedProximity: 20,
+    breedRange: 700,
+    breedEnergy: 7,
+    breedProximity: 30,
     feedRange: 150,
-    feedCap: 60,
+    feedCap: 50,
     feedProximity: 25,
     color: 'orchid',
     soundAttack: 0.1,
@@ -45,6 +45,74 @@ function Organism2(x1, y1, x2, y2) {
 //-------------------------------------------------------------------------------------------
 
 Organism2.prototype.update = function() {
+
+    // BREEDING //
+    if (this.energy > this.settings.breedEnergy) {
+        var partner = null;
+        var range = this.settings.breedRange;
+
+        // check for potential partners //
+        for (j=0; j<org2.length; j++) {
+            var organism = org2[j];
+            if (organism!== this && organism.energy > this.settings.breedEnergy && distanceBetweenPoints(this.position, organism.position) < range ) {
+                partner = organism;
+                range = distanceBetweenPoints(this.position, organism.position);
+            }
+        }
+        if (partner) {
+            // point towards partner //
+            this.angleDest = angleBetweenPoints(this.position, partner.position);
+            if (this.speed < partner.speed) {
+                this.speed -= this.settings.fluctuation;
+            } else {
+                this.speed += this.settings.fluctuation;
+            }
+
+            // if close enough to partner, breed! //
+            if (distanceBetweenPoints(this.position, partner.position) < this.settings.breedProximity) {
+                var area = 10 * scale;
+                generateOrganism2(1, this.position.x - area, this.position.y - area, this.position.x + area, this.position.y + area);
+                generateVisual(this.position, this.size);
+                soundEvent(this.settings.soundVolume, this.settings.soundAttack, this.settings.soundRelease);
+                this.energy -= 5;
+                partner.energy -= 5;
+            }
+        }
+    }
+
+    // FEEDING //
+    if (!partner && this.energy < this.settings.feedCap) {
+        var target = null;
+        var range = this.settings.feedRange;
+        for (j=0; j<spores.length; j++) {
+            var organism = spores[j];
+            if (organism.variant && distanceBetweenPoints(this.position, organism.position) < range ) {
+                target = organism;
+                range = distanceBetweenPoints(this.position, organism.position);
+            }
+        }
+        if (target) {
+
+            // point towards target //
+            this.angleDest = angleBetweenPoints(this.position, target.position);
+
+            // if close enough to target, eat it! //
+            if (distanceBetweenPoints(this.position, target.position) < this.settings.feedProximity) {
+                this.energy += (target.size * 1.5);
+                target.kill();
+            }
+        }
+    }
+
+
+    // ENERGY //
+
+    // make sure to take away less energy than orgamism1 so that fewer organisms last longer
+
+    this.energy -= 0.004;
+    if (this.energy <= 0) {
+        this.kill();
+    }
 
     // MOVEMENT //
     // Store a memory of previous positions //
@@ -130,9 +198,11 @@ Organism2.prototype.draw = function() {
 //-------------------------------------------------------------------------------------------
 
 Organism2.prototype.kill = function() {
-
+    removeFromArray(this, org2);
+    var area = 30 * scale;
+    generateSpores(this.size * 0.72, this.position.x - area, this.position.y - area, this.position.x + area, this.position.y + area);
+    generateVisual(this.position, this.size);
 };
-
 
 //-------------------------------------------------------------------------------------------
 //  SPEED CAP
