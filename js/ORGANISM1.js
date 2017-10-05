@@ -8,9 +8,9 @@ var org1Settings = {
     small: 16,
     large: 21,
     tail: 17,
-    breedRange: 420,
+    breedRange: 380,
     breedEnergy: 8,
-    breedProximity: 20,
+    breedProximity: 18,
     feedRange: 260,
     feedCap: 20,
     feedProximity: 16,
@@ -248,6 +248,18 @@ removeFromArray(this, org1);
     // kill method now calls soundEvent function to generate audio effect
     soundEvent(this.settings.soundVolume, this.settings.soundAttack, this.settings.soundRelease);
 };
+
+// make array size cap with random population cull // think this is not working, look into adjusting
+
+    if (org1 > 40) {
+        k = cull[Math.floor(Math.random() * cull.length)];
+
+        for (var i=0; i<k; i++) {
+            m = Math.floor(Math.random() * 39) + 1  
+            org1[m].kill
+        }
+
+    }
 
 
 //-------------------------------------------------------------------------------------------

@@ -3,11 +3,6 @@
 var canvas;
 var ctx;
 
-// // MOUSE EVENTS //
-
-// var mousePosition = new Point (0,0);
-
-
 // METRICS //
 var width = 0;
 var height = 0;
@@ -28,6 +23,8 @@ var visuals = [];
 var spores = [];
 var org1 = [];
 var org2 = [];
+var org3 = [];
+var cull = [1,3,5,7,9,11,13,15,17,19,21,23,25];
 
 //-------------------------------------------------------------------------------------------
 //  INITIALISE
@@ -61,11 +58,13 @@ function init() {
 
     // so that generate functions are called when the page loads and organisms and spores are created //
 
-    generateSpores(60, 0, 0, width, height);
+    generateSpores(55, 0, 0, width, height);
 
-    generateOrganism1(8, 0, 0, width, height);
+    generateOrganism1(7, 0, 0, width, height);
 
-    generateOrganism2(3, 0, 0, width, height);
+    generateOrganism2(4, 0, 0, width, height);
+
+    generateOrganism3(3, 0, 0, width, height);
 
 
     // BEGIN //
@@ -95,6 +94,12 @@ function generateOrganism1(n, x1, y1, x2, y2) {
 function generateOrganism2(n, x1, y1, x2, y2) {
     for (var i=0; i<n; i++) {
         org2.push( new Organism2(x1, y1, x2, y2) );
+    }
+}
+
+function generateOrganism3(n, x1, y1, x2, y2) {
+    for (var i=0; i<n; i++) {
+        org3.push( new Organism3(x1, y1, x2, y2) );
     }
 }
 
@@ -142,6 +147,12 @@ function update() {
         org2[i].update();
     }
 
+    // LOOP THROUGH ALL ORGANISM3 AND UPDATE THEIR POSITIONS //
+
+    for (var i=0; i<org3.length; i++) {
+        org3[i].update();
+    }
+
 
     // LOOP THROUGH ALL VISUALS AND ANIMATE THEM //
 
@@ -183,6 +194,12 @@ function draw() {
 
     for (var i=0; i<org2.length; i++) {
         org2[i].draw();
+    }
+
+    // LOOP THROUGH ALL ORGANISM3 AND DRAW THEM //
+
+    for (var i=0; i<org3.length; i++) {
+        org3[i].draw();
     }
 
 

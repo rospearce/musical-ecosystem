@@ -3,10 +3,10 @@ var org2Settings = {
     minSpeed: 1.2,
     fluctuation: (TAU/360) * 12,
     rotationSpeed: 12,
-    small: 35,
-    large: 41,
+    small: 39,
+    large: 45,
     tail: 22,
-    breedRange: 400,
+    breedRange: 420,
     breedEnergy: 7,
     breedProximity: 30,
     feedRange: 260,
@@ -109,7 +109,7 @@ Organism2.prototype.update = function() {
 
     // make sure to take away less energy than orgamism1 so that fewer organisms last longer
 
-    this.energy -= 0.004;
+    this.energy -= 0.038;
     if (this.energy <= 0) {
         this.kill();
     }
@@ -207,6 +207,16 @@ Organism2.prototype.kill = function() {
     generateSpores(this.size * 0.72, this.position.x - area, this.position.y - area, this.position.x + area, this.position.y + area);
     generateVisual(this.position, this.size);
 };
+
+if (org2 > 30) {
+        k = cull[Math.floor(Math.random() * cull.length)];
+
+        for (var i=0; i<k; i++) {
+            m = Math.floor(Math.random() * 29) + 1  
+            org2[m].kill
+        }
+
+}
 
 //-------------------------------------------------------------------------------------------
 //  SPEED CAP
